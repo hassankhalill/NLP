@@ -1,0 +1,21 @@
+{
+  "total_cells": 33,
+  "cells_range": "63-95",
+  "sections": [
+    {
+      "section": "Section 9: ABSA Model Creation and Deployment",
+      "cells": "63-80",
+      "description": "Fine-tuning BERT models and creating FastAPI deployment"
+    },
+    {
+      "section": "Section 10: Model Monitoring and Retraining",
+      "cells": "81-93",
+      "description": "Monitoring system with drift detection and automated retraining"
+    },
+    {
+      "section": "Section 11: Implementation Summary",
+      "cells": "94-95",
+      "description": "Summary and usage guide"
+    }
+  ]
+}

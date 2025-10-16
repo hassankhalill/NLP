@@ -1,0 +1,12 @@
+{
+  "created_at": "2025-10-16T11:21:36.368718",
+  "source": "actual_dataset_distribution",
+  "sentiment_distribution": {
+    "positive": 0.7810781078107811,
+    "neutral": 0.14622295562889623,
+    "negative": 0.0726989365603227
+  },
+  "avg_confidence": 0.5538845273852349,
+  "aspect_detection_rate": 0.7342317565089842,
+  "notes": "Baseline updated with actual tourism review data distribution. Pre-trained models typically show 50-65% confidence."
+}

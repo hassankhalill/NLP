@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  absa-api:
+    build: .
+    container_name: saudi-tourism-absa-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount data files for updates without rebuilding
+      - ./data_with_absa.csv:/app/data_with_absa.csv:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - absa-network
+
+networks:
+  absa-network:
+    driver: bridge

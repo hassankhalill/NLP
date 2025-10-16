@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-10-16T11:25:16.205494",
+  "drift_threshold": 0.15,
+  "tests": {
+    "sentiment_distribution": {
+      "metric": "sentiment_distribution",
+      "drift_score": 0.15033186998772527,
+      "threshold": 0.15,
+      "drifted": true,
+      "current_distribution": {
+        "positive": 0.66,
+        "neutral": 0.12,
+        "negative": 0.22
+      },
+      "baseline_distribution": {
+        "positive": 0.7810781078107811,
+        "neutral": 0.14622295562889623,
+        "negative": 0.0726989365603227
+      }
+    },
+    "confidence": {
+      "metric": "avg_confidence",
+      "drift_score": 0.0,
+      "threshold": 0.15,
+      "drifted": false,
+      "current_value": 0.5538845273852349,
+      "baseline_value": 0.5538845273852349,
+      "change_pct": 0.0
+    },
+    "aspect_detection": {
+      "metric": "aspect_detection_rate",
+      "drift_score": 0.035095517542764444,
+      "threshold": 0.15,
+      "drifted": 

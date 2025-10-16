@@ -1,0 +1,10 @@
+{
+  "retrain_id": "20251016_112456",
+  "timestamp": "2025-10-16T11:24:57.538798",
+  "reason": "Triggered by: low_confidence, data_drift",
+  "training_samples": 22489,
+  "train_split": 15742,
+  "val_split": 3373,
+  "test_split": 3374,
+  "status": "completed"
+}

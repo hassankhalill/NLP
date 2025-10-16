@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  absa-api:
+    build: .
+    container_name: absa-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./models:/app/models:ro  # Read-only models
+      - ./logs:/app/logs         # Writable logs
+      - ./monitoring:/app/monitoring  # Monitoring data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G

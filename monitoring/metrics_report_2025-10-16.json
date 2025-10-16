@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-10-16T11:25:16.203257",
+  "total_predictions": 50,
+  "avg_confidence": 0.5538845273852349,
+  "avg_processing_time_ms": 152.85600185394287,
+  "aspect_detection_rate": 0.76,
+  "sentiment_distribution": {
+    "positive": 0.66,
+    "neutral": 0.12,
+    "negative": 0.22
+  },
+  "language_distribution": {
+    "ara": 39,
+    "eng": 11
+  },
+  "top_aspects": {
+    "atmosphere": 14,
+    "views": 13,
+    "location": 12,
+    "cleanliness": 7,
+    "service": 7,
+    "price": 5,
+    "food": 5,
+    "family_friendly": 4,
+    "facilities": 4,
+    "nature_environment": 4
+  }
+}

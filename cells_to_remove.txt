@@ -1,0 +1,190 @@
+CELLS TO REMOVE FROM code.ipynb
+====================================================================================================
+
+
+CELL INDEX: 64
+CELL ID: xkpnftkfcn
+TYPE: code
+DESCRIPTION: Training Data Preparation for Fine-tuning
+SIZE: 2679 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Prepare training data for ABSA fine-tuning
+import json
+from sklearn.model_selection import train_test_split
+
+print("Preparing training data for ABSA model...")
+
+# Create training samples: (text, aspect, sentiment)
+training_data = []
+
+# Use reviews that have aspects detected
+reviews_with_aspects = df[df['aspects'].apply(len) > 0].copy()
+
+print(f"Processing {len(reviews_with_aspects)} reviews with aspects...")
+
+for idx, row in reviews_with_aspects.iterrows():
+    review_text = row['content_cleaned']
+    language = row['language']
+    overall_sentiment = row['sentiment']
+    
+    # For each aspect in the review, create a training sample
+    for aspect in row['aspects']:
+        # Extract cont
+... [truncated, total 2679 chars] ...
+
+
+CELL INDEX: 66
+CELL ID: o2bqr4oe71n
+TYPE: code
+DESCRIPTION: Install Required Libraries for Model Training
+SIZE: 574 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Install required libraries for model training
+import subprocess
+import sys
+
+print("Installing required libraries for fine-tuning...")
+
+required_packages = [
+    'transformers>=4.30.0',
+    'torch>=2.0.0',
+    'datasets>=2.12.0',
+    'accelerate>=0.20.0',
+    'evaluate>=0.4.0',
+    'scikit-learn>=1.2.0'
+]
+
+for package in required_packages:
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-q', package])
+        print(f"✓ {package}")
+    except:
+        print(f"⚠ Failed to install {package}")
+
+print("\n✓ All required packages installed")
+
+
+CELL INDEX: 67
+CELL ID: o36nwmzroa
+TYPE: code
+DESCRIPTION: Prepare Datasets for Fine-tuning
+SIZE: 2068 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Prepare datasets for fine-tuning
+from datasets import Dataset
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+import torch
+import evaluate
+import numpy as np
+
+# Create sentiment label mapping
+sentiment_mapping = {'negative': 0, 'neutral': 1, 'positive': 2}
+reverse_sentiment_mapping = {0: 'negative', 1: 'neutral', 2: 'positive'}
+
+# Prepare Arabic dataset
+print("Preparing Arabic dataset...")
+arabic_train = train_data[train_data['language'] == 'ara'].copy()
+arabic_val = val_data[val_data['language'] == 'ara'].copy()
+arabic_test = test_data[test_data['language'] == 'ara'].copy()
+
+arabic_train['label'] = arabic_train['sentiment'].map(sentim
+... [truncated, total 2068 chars] ...
+
+
+CELL INDEX: 68
+CELL ID: brkusm7upwr
+TYPE: code
+DESCRIPTION: Fine-tune Arabic ABSA Model
+SIZE: 2704 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Fine-tune Arabic ABSA Model
+print("="*80)
+print("FINE-TUNING ARABIC ABSA MODEL")
+print("="*80)
+
+# Load tokenizer and model for Arabic
+arabic_model_name = "aubmindlab/bert-base-arabertv2"  # Better Arabic BERT
+arabic_tokenizer = AutoTokenizer.from_pretrained(arabic_model_name)
+
+# Tokenize datasets
+def tokenize_function(examples):
+    return arabic_tokenizer(examples['text'], padding='max_length', truncation=True, max_length=128)
+
+print("\nTokenizing Arabic datasets...")
+arabic_tokenized_train = arabic_dataset_train.map(tokenize_function, batched=True)
+arabic_tokenized_val = arabic_dataset_val.map(tokenize_function, batched=True)
+arabic_tokenized_test = arabic_dataset_test.map(tokenize_funct
+... [truncated, total 2704 chars] ...
+
+
+CELL INDEX: 69
+CELL ID: cn939jxr7c
+TYPE: code
+DESCRIPTION: Fine-tune English ABSA Model
+SIZE: 2255 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Fine-tune English ABSA Model
+print("="*80)
+print("FINE-TUNING ENGLISH ABSA MODEL")
+print("="*80)
+
+# Load tokenizer and model for English
+english_model_name = "distilbert-base-uncased"
+english_tokenizer = AutoTokenizer.from_pretrained(english_model_name)
+
+# Tokenize datasets
+def tokenize_function_eng(examples):
+    return english_tokenizer(examples['text'], padding='max_length', truncation=True, max_length=128)
+
+print("\nTokenizing English datasets...")
+english_tokenized_train = english_dataset_train.map(tokenize_function_eng, batched=True)
+english_tokenized_val = english_dataset_val.map(tokenize_function_eng, batched=True)
+english_tokenized_test = english_dataset_test.map(tokenize_function
+... [truncated, total 2255 chars] ...
+
+
+CELL INDEX: 71
+CELL ID: 7xh16fweded
+TYPE: code
+DESCRIPTION: Save Fine-tuned Models
+SIZE: 2465 characters
+----------------------------------------------------------------------------------------------------
+CONTENT PREVIEW (first 700 chars):
+# Save fine-tuned models
+import os
+import pickle
+
+print("Saving fine-tuned models...")
+
+# Create models directory
+os.makedirs('./models/production', exist_ok=True)
+
+# Save Arabic model
+arabic_model.save_pretrained('./models/production/arabic_absa')
+arabic_tokenizer.save_pretrained('./models/production/arabic_absa')
+print("✓ Arabic model saved to ./models/production/arabic_absa")
+
+# Save English model
+english_model.save_pretrained('./models/production/english_absa')
+english_tokenizer.save_pretrained('./models/production/english_absa')
+print("✓ English model saved to ./models/production/english_absa")
+
+# Save aspect dictionary and mappings
+with open('./models/production/aspects_config.pkl', 'w
+... [truncated, total 2465 chars] ...
+
+
+====================================================================================================
+QUICK REFERENCE - CELL IDS FOR REMOVAL
+====================================================================================================
+xkpnftkfcn
+o2bqr4oe71n
+o36nwmzroa
+brkusm7upwr
+cn939jxr7c
+7xh16fweded

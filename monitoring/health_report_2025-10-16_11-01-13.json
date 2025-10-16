@@ -1,0 +1,134 @@
+{
+  "timestamp": "2025-10-16T11:01:13.066180",
+  "monitoring_metrics": {
+    "timestamp": "2025-10-16T11:01:13.066425",
+    "total_predictions": 100,
+    "avg_confidence": 0.5458718323707581,
+    "avg_processing_time_ms": 152.3153257369995,
+    "aspect_detection_rate": 0.71,
+    "sentiment_distribution": {
+      "negative": 0.19,
+      "positive": 0.66,
+      "neutral": 0.15
+    },
+    "language_distribution": {
+      "ara": 79,
+      "eng": 21
+    },
+    "top_aspects": {
+      "atmosphere": 32,
+      "location": 25,
+      "views": 23,
+      "service": 16,
+      "cleanliness": 14,
+      "temperature_weather": 13,
+      "accommodation": 13,
+      "price": 8,
+      "food": 8,
+      "accessibility": 7
+    }
+  },
+  "alerts": [
+    {
+      "type": "LOW_CONFIDENCE",
+      "severity": "HIGH",
+      "message": "Average confidence (0.546) below threshold (0.7)",
+      "current_value": 0.5458718323707581,
+      "threshold": 0.7
+    }
+  ],
+  "drift_results": {
+    "timestamp": "2025-10-16T11:01:13.062671",
+    "drift_threshold": 0.15,
+    "tests": {
+      "sentiment_distribution": {
+        "metric": "sentiment_distribution",
+        "drift_score": 0.2368281496676465,
+        "threshold": 0.15,
+        "drifted": true,
+        "current_distribution": {
+          "negative": 0.19,
+          "positive": 0.66,
+          "neutral": 0.15
+        },
+        "baseline_distribution": {
+          "positive": 0.33,
+          "neutral": 0.33,
+          "negative": 0.34
+        }
+      },
+      "confidence": {
+        "metric": "avg_confidence",
+        "drift_score": 0.35779784426969635,
+        "threshold": 0.15,
+        "drifted": true,
+        "current_value": 0.5458718323707581,
+        "baseline_value": 0.85,
+        "change_pct": 35.779784426969634
+      },
+      "aspect_detection": {
+        "metric": "aspect_detection_rate",
+        "drift_score": 0.05333333333333338,
+        "threshold": 0.15,
+        "drifted": false,
+        "current_value": 0.71,
+        "baseline_value": 0.75,
+        "change_pct": 5.3333333333333375
+      }
+    },
+    "drift_detected": true,
+    "num_drifted_metrics": 2
+  },
+  "retraining_status": {
+    "should_retrain": true,
+    "triggers": [
+      {
+        "trigger": "low_confidence",
+        "reason": "Average confidence (0.546) below threshold (0.7)",
+        "current_value": 0.5458718323707581,
+        "threshold": 0.7
+      },
+      {
+        "trigger": "data_drift",
+        "reason": "2 metrics showing drift",
+        "num_drifted_metrics": 2,
+        "drift_details": {
+          "sentiment_distribution": {
+            "metric": "sentiment_distribution",
+            "drift_score": 0.2368281496676465,
+            "threshold": 0.15,
+            "drifted": true,
+            "current_distribution": {
+              "negative": 0.19,
+              "positive": 0.66,
+              "neutral": 0.15
+            },
+            "baseline_distribution": {
+              "positive": 0.33,
+              "neutral": 0.33,
+              "negative": 0.34
+            }
+          },
+          "confidence": {
+            "metric": "avg_confidence",
+            "drift_score": 0.35779784426969635,
+            "threshold": 0.15,
+            "drifted": true,
+            "current_value": 0.5458718323707581,
+            "baseline_value": 0.85,
+            "change_pct": 35.779784426969634
+          },
+          "aspect_detection": {
+            "metric": "aspect_detection_rate",
+            "drift_score": 0.05333333333333338,
+            "threshold": 0.15,
+            "drifted": false,
+            "current_value": 0.71,
+            "baseline_value": 0.75,
+            "change_pct": 5.3333333333333375
+          }
+        }
+      }
+    ]
+  }
+}
